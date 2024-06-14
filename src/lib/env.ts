@@ -8,9 +8,10 @@ import { z } from 'zod';
 
 const envVariables = z.object({
   NEXT_PUBLIC_SHOW_LOGGER: z.enum(['true', 'false']).optional(),
+  NEXT_PUBLIC_API_URL: z.string().default("https://jsonplaceholder.typicode.com")
 });
 
-envVariables.parse(process.env);
+const env =envVariables.parse(process.env);
 
 declare global {
   namespace NodeJS {
@@ -18,3 +19,5 @@ declare global {
     interface ProcessEnv extends z.infer<typeof envVariables> {}
   }
 }
+
+export default env;
