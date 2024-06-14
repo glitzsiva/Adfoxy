@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import * as React from 'react';
 
 import '@/styles/globals.css';
-import '@/styles/colors.css';
 
+import QueryProvider from '@/app/components/QueryProvider';
 import { siteConfig } from '@/constant/config';
 
 export const metadata: Metadata = {
@@ -43,8 +43,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body>{children}</body>
-    </html>
+    <QueryProvider>
+      <html lang='en' >
+        <body suppressHydrationWarning={true}>
+          {children}
+        </body>
+      </html>
+    </QueryProvider>
   );
 }
